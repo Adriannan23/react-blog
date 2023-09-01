@@ -1,11 +1,12 @@
 import { useHref } from "react-router-dom";
 import { selectPostsById } from "../../../redux/postsRedux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-
+import { useDispatch } from 'react-redux';
+import { removePost } from "../../../redux/postsRedux";
 
 const Post = props => {
   const href = useHref();
@@ -19,6 +20,15 @@ const Post = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const dispatch = useDispatch();
+
+  const handleRemoveClick = () => {
+
+    dispatch(removePost(post.id));
+    handleClose();
+  };
+
+  if (!post) return <Navigate to="/" />
 
   return (
     <div >
@@ -51,7 +61,7 @@ const Post = props => {
               <Button variant="secondary" onClick={handleClose}>
                 Cancel
               </Button>
-              <Button variant="danger">Remove</Button>
+              <Button variant="danger" onClick={handleRemoveClick}>Remove</Button>
             </Modal.Footer>
           </Modal>
         </div>
