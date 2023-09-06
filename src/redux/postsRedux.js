@@ -17,6 +17,10 @@ export const addPost = payload => {
   return ({ type: 'ADD_POST', payload })
 };
 
+export const editPost = payload => {
+  return ({ type: 'EDIT_POST', payload })
+};
+
 
 // action creators
 const postsReducer = (statePart = [], action) => {
@@ -26,6 +30,9 @@ const postsReducer = (statePart = [], action) => {
 
     case 'ADD_POST':
       return [...statePart, { ...action.payload, id: statePart.length + 1 }];
+
+    case 'EDIT_POST':
+      return statePart.map(post => (post.id == action.payload.postId ? { ...post, ...action.payload } : post));
 
     default:
       return statePart;
