@@ -7,6 +7,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { removePost } from "../../../redux/postsRedux";
+import DatePicker from "react-datepicker";
+
+import dateToStr from "../../../utils/dateToStr";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const Post = props => {
   const href = useHref();
@@ -37,8 +42,9 @@ const Post = props => {
         <div className="col-md-5 mb-4">
           <h3>{post.title}</h3>
           <p><b>Author: </b>{post.author}</p>
-          <p><b>Published: </b>{post.publishedDate}</p>
+          <p><b>Published: </b>{dateToStr(post.publishedDate)}</p>
           <div>{post.shortDescription}</div>
+          <p dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
         <div className="col-md-4">
           <button type="button" className="btn btn-outline-info mx-2">

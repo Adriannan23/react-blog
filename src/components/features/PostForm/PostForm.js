@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const PostForm = ({ action, actionText, ...props }) => {
 
@@ -40,10 +44,10 @@ const PostForm = ({ action, actionText, ...props }) => {
           </Form.Group>
           <Form.Group className="mb-3 col-4" controlId="exampleForm.ControlInput1" >
             <Form.Label>Published</Form.Label>
-            <Form.Control
-              type="text"
-              value={publishedDate}
-              onChange={(e) => setPublishedDate(e.target.value)} />
+            <DatePicker
+              selected={publishedDate ? new Date(publishedDate) : new Date()}
+              onChange={(date) => setPublishedDate(date)}
+            />
           </Form.Group>
           <Form.Group className="mb-3  col-10" controlId="exampleForm.ControlTextarea1" >
             <Form.Label>Short description</Form.Label>
@@ -55,9 +59,7 @@ const PostForm = ({ action, actionText, ...props }) => {
           </Form.Group>
           <Form.Group className="mb-3 col-10" controlId="exampleForm.ControlTextarea1" >
             <Form.Label>Main content</Form.Label>
-            <Form.Control as="textarea" rows={5}
-              value={content} placeholder="Leave a comment here"
-              onChange={(e) => setContent(e.target.value)} />
+            <ReactQuill theme="snow" onChange={setContent} placeholder='Write your post here' />
           </Form.Group>
 
           <Button
@@ -77,7 +79,7 @@ export default PostForm;
 PostForm.propTypes = {
   action: () => { },
   actionText: PropTypes.string,
-  publishedDate: PropTypes.string,
+  publishedDate: PropTypes.object,
   title: PropTypes.string,
   author: PropTypes.string,
   content: PropTypes.string,
