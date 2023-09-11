@@ -14,7 +14,7 @@ const Categories = (props) => {
           <h2>All categories</h2>
           <div className="list-group">
             {categories.map((category) => (
-              <Link to={'/categories/' + category} className="list-group-item list-group-item-action"
+              <Link to={'/category/' + category.toLowerCase()} className="list-group-item list-group-item-action"
                 key={category}
                 style={{ color: 'blue', textDecoration: 'underline' }}
               >

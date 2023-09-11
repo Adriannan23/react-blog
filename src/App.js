@@ -10,6 +10,7 @@ import Header from './components/views/Header/Header';
 import Footer from './components/views/Footer/Footer';
 import EditPostForm from './components/features/EditPostForm/EditPostForm';
 import Categories from './components/pages/Categories/Categories';
+import PostByCategory from './components/features/PostByCategory/PostByCategory';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/post/edit/:id" element={<EditPostForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/category/:postCategory" element={<PostByCategory />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

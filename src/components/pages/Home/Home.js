@@ -1,7 +1,6 @@
 import Articles from "../../features/Articles/Articles";
 import { Link } from "react-router-dom";
 
-
 const Home = props => {
   return <div>
     <div className="d-flex justify-content-between">

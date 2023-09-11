@@ -14,6 +14,7 @@ const Articles = props => {
             <h3>{post.title}</h3>
             <p><b>Author: </b>{post.author}</p>
             <p><b>Published: </b>{dateToStr(post.publishedDate)}</p>
+
             <div>{post.shortDescription}</div>
             <button type="button" className="btn btn-primary mt-3">
               <Link to={`/post/${post.id}`} className="text-light text-decoration-none">Read More</Link>

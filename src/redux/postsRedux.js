@@ -7,7 +7,9 @@ export const selectPostsById = (state, id) => {
 }
 
 export const getPostByCategory = ({ posts }, postCategory) =>
-  posts.filter((post) => post.category === postCategory);
+  posts.filter((post) => post.category.toLowerCase() === postCategory.toLowerCase());
+
+
 
 // actions
 const createActionName = actionName => `app/posts/${actionName}`;

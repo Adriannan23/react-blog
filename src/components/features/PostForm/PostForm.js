@@ -33,6 +33,8 @@ const PostForm = ({ action, actionText, ...props }) => {
 
   const categories = useSelector((state) => state.categories);
 
+  console.log(category);
+
   return (
     <div className="row" >
       <div className="col-md-2"></div>
