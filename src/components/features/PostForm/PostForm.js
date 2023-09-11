@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const PostForm = ({ action, actionText, ...props }) => {
 
@@ -17,6 +18,7 @@ const PostForm = ({ action, actionText, ...props }) => {
   const [content, setContent] = useState('');
   const [contentError, setContentError] = useState(false);
   const [dateError, setDateError] = useState(false);
+  const [category, setCategory] = useState(props.category || '');
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
@@ -24,10 +26,12 @@ const PostForm = ({ action, actionText, ...props }) => {
     setContentError(!content)
     setDateError(!publishedDate)
     if (content && publishedDate) {
-      action({ title, author, publishedDate, shortDescription, content });
+      action({ title, author, publishedDate, shortDescription, content, category });
     }
 
   };
+
+  const categories = useSelector((state) => state.categories);
 
   return (
     <div className="row" >
@@ -66,6 +70,21 @@ const PostForm = ({ action, actionText, ...props }) => {
             />
             {dateError && <small className="d-block form-text text-danger mt-2">Please choose date.</small>}
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="category">
+            <Form.Label>Category</Form.Label>
+            <Form.Select
+              {...register("category", { required: true })}
+              as="select"
+              placeholder="Please select category"
+              value={category}
+              onChange={e => setCategory(e.target.value)}
+            >
+              {categories.map((category => (<option value={category}>{category}</option>)))}
+            </Form.Select>
+            {errors.category && <small className="d-block form-text text-danger mt-2">Field is required.</small>}
+          </Form.Group>
+
           <Form.Group className="mb-3  col-10" controlId="exampleForm.ControlTextarea1" >
             <Form.Label>Short description</Form.Label>
             <Form.Control

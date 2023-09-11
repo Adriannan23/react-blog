@@ -7,8 +7,6 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { removePost } from "../../../redux/postsRedux";
-import DatePicker from "react-datepicker";
-
 import dateToStr from "../../../utils/dateToStr";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -43,6 +41,9 @@ const Post = props => {
           <h3>{post.title}</h3>
           <p><b>Author: </b>{post.author}</p>
           <p><b>Published: </b>{dateToStr(post.publishedDate)}</p>
+          <div><b>Category: </b>
+            {post.category}
+          </div>
           <div>{post.shortDescription}</div>
           <p dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>

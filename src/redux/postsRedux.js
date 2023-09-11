@@ -5,6 +5,10 @@ export const selectedPosts = state => state.posts;
 export const selectPostsById = (state, id) => {
   return state.posts.filter(post => post.id == id)[0];
 }
+
+export const getPostByCategory = ({ posts }, postCategory) =>
+  posts.filter((post) => post.category === postCategory);
+
 // actions
 const createActionName = actionName => `app/posts/${actionName}`;
 
@@ -20,6 +24,7 @@ export const addPost = payload => {
 export const editPost = payload => {
   return ({ type: 'EDIT_POST', payload })
 };
+
 
 
 // action creators

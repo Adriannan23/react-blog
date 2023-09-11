@@ -19,7 +19,6 @@ const EditPostForm = () => {
   };
 
   const post = useSelector(state => selectPostsById(state, postId));
-  console.log('post', post.title);
 
   return (
 
